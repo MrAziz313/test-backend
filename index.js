@@ -1,10 +1,20 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
+const rateLimit = require("express-rate-limit");
 const app = express()
 const port = 3001
 
 
+app.use(
+    cors({
+      origin:
+        "https://online-islamic-institute-admin.vercel.app" ||
+        "http://localhost:3003",
+      credentials: true,
+    })
+  );
 
 app.get("/",(req,res)=>{
 res.send("Hello")
