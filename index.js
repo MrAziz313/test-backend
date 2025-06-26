@@ -1,4 +1,6 @@
-const express = require("express")
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
 const app = express()
 const port = 3001
 
@@ -7,7 +9,17 @@ const port = 3001
 app.get("/",(req,res)=>{
 res.send("Hello")
 })
-
+mongoose
+  .connect(
+      "mongodb+srv://islamic_institute:KBasUcG5v7IIKPoL@cluster0.zxklh5p.mongodb.net/islamic_institute_db?retryWrites=true&w=majority&appName=Cluster0",
+    {
+      serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+      maxPoolSize: 10, // Limit connection pool
+      autoIndex: false, // Disable auto index for performance
+    }
+  )
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error("MongoDB connection error:", err.message));
 
 app.listen(port,()=>{
 console.log(`Serveris starting on Poart ${port}`);
