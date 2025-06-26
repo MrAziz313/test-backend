@@ -31,25 +31,25 @@ app.use(
 );
 app.use(express.json()); 
 // MongoDB connection
-mongoose
-  .connect(
-    "mongodb+srv://islamic_institute:KBasUcG5v7IIKPoL@cluster0.zxklh5p.mongodb.net/islamic_institute_db?retryWrites=true&w=majority&appName=Cluster0",
-    // {
-    //   serverSelectionTimeoutMS: 5000,
-    //   socketTimeoutMS: 45000,
-    //   maxPoolSize: 10,
-    //   autoIndex: true,
-    // }
-  )
-  .then(() =>
-    console.log(
-      "MongoDB connected:",
-      "mongodb+srv://islamic_institute:KBasUcG5v7IIKPoL@cluster0.zxklh5p.mongodb.net/islamic_institute_db?retryWrites=true&w=majority&appName=Cluster0"
-    )
-  )
-  .catch((err) =>
-    console.error("MongoDB connection error:", err.message, err.stack)
-  );
+// mongoose
+//   .connect(
+//     "mongodb+srv://islamic_institute:KBasUcG5v7IIKPoL@cluster0.zxklh5p.mongodb.net/islamic_institute_db?retryWrites=true&w=majority&appName=Cluster0",
+//     // {
+//     //   serverSelectionTimeoutMS: 5000,
+//     //   socketTimeoutMS: 45000,
+//     //   maxPoolSize: 10,
+//     //   autoIndex: true,
+//     // }
+//   )
+//   .then(() =>
+//     console.log(
+//       "MongoDB connected:",
+//       "mongodb+srv://islamic_institute:KBasUcG5v7IIKPoL@cluster0.zxklh5p.mongodb.net/islamic_institute_db?retryWrites=true&w=majority&appName=Cluster0"
+//     )
+//   )
+//   .catch((err) =>
+//     console.error("MongoDB connection error:", err.message, err.stack)
+//   );
 
 // Routes
 app.get("/", (req, res) => {
@@ -82,6 +82,8 @@ app.use((req, res) => {
 //   });
 // });
 
-
+app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
 
 module.exports = serverless(app);
