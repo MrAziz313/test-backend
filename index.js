@@ -19,6 +19,13 @@ app.use(
 app.get("/",(req,res)=>{
 res.send("Hello")
 })
+// Rate limiter for resend OTP
+const resendOTPLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // Limit to 5 requests per window
+    message: "Too many OTP resend requests, please try again later.",
+  });
+
 mongoose
   .connect(
       "mongodb+srv://islamic_institute:KBasUcG5v7IIKPoL@cluster0.zxklh5p.mongodb.net/islamic_institute_db?retryWrites=true&w=majority&appName=Cluster0",
