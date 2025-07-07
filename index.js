@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const app = express();
-
 const port = 3001;
 
 app.use(
@@ -27,14 +26,13 @@ const resendOTPLimiter = rateLimit({
 });
 
 mongoose
-  .connect(process.env.MONGO_URI, {
-    serverSelectionTimeoutMS: 10000,
-    maxPoolSize: 10,
-    autoIndex: false,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+"mongodb+srv://admin:admin123@cluster0.eluborj.mongodb.net/quranInstitute?retryWrites=true&w=majority&appName=Cluster0",    {
+      serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+      maxPoolSize: 10, // Limit connection pool
+      autoIndex: false, // Disable auto index for performance
+    }
+  )
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB connection error:", err.message));
-
 
