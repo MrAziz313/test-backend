@@ -18,9 +18,7 @@ app.use(
 
 app.get("/", (req, res) => {
   res.send("Hello");
-});
-app.use("/api/auth", authRoutes);
-// Rate limiter for resend OTP
+});// Rate limiter for resend OTP
 const resendOTPLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 5, // Limit to 5 requests per window
