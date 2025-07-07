@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const app = express();
-const serverless = require("serverless-http");
 
 const port = 3001;
 
@@ -39,4 +38,3 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err.message));
 
 
-module.exports = serverless(app);
