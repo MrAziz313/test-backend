@@ -4,12 +4,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const app = express();
+const serverless = require("serverless-http");
+
 const port = 3001;
 
 app.use(
   cors({
     origin:
-      "https://online-islamic-institute-admin.vercel.app" ||
+      "http://localhost:5173" ||
       "http://localhost:3001",
     credentials: true,
   })
@@ -26,17 +28,15 @@ const resendOTPLimiter = rateLimit({
 });
 
 mongoose
-  .connect(
-    "mongodb+srv://islamic_institute:KBasUcG5v7IIKPoL@cluster0.zxklh5p.mongodb.net/islamic_institute_db?retryWrites=true&w=majority&appName=Cluster0",
-    {
-      serverSelectionTimeoutMS: 5000, // 5 seconds timeout
-      maxPoolSize: 10, // Limit connection pool
-      autoIndex: false, // Disable auto index for performance
-    }
-  )
+  .connect(process.env.MONGO_URI, {
+    serverSelectionTimeoutMS: 10000,
+    maxPoolSize: 10,
+    autoIndex: false,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB connection error:", err.message));
 
-app.listen(port, () => {
-  console.log(`Serveris starting on Poart ${port}`);
-});
+
+module.exports = serverless(app);
