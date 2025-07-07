@@ -8,9 +8,7 @@ const port = 3001;
 
 app.use(
   cors({
-    origin:
-      "http://localhost:5173" ||
-      "http://localhost:3001",
+    origin: "http://localhost:5173" || "http://localhost:3001",
     credentials: true,
   })
 );
@@ -27,7 +25,8 @@ const resendOTPLimiter = rateLimit({
 
 mongoose
   .connect(
-"mongodb+srv://admin:admin123@cluster0.eluborj.mongodb.net/quranInstitute?retryWrites=true&w=majority&appName=Cluster0",    {
+    "mongodb+srv://admin:admin123@cluster0.eluborj.mongodb.net/quranInstitute?retryWrites=true&w=majority&appName=Cluster0",
+    {
       serverSelectionTimeoutMS: 5000, // 5 seconds timeout
       maxPoolSize: 10, // Limit connection pool
       autoIndex: false, // Disable auto index for performance
@@ -35,4 +34,3 @@ mongoose
   )
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB connection error:", err.message));
-
